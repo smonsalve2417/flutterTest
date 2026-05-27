@@ -1,86 +1,30 @@
-# Flutter web template with Roble services
+# Pokémon Dex
 
-A Flutter project to test authentication and data services based on Roble following clean architecture principles.
+Aplicación Flutter basada en clean architecture que consume la API pública de PokeAPI, mantiene los datos en memoria durante la ejecución y expone CRUD local sobre la lista cargada.
 
-An improved immplementation of the datasources has beeen implemented, using an unified error handling and reducing code repetition.
+## Qué incluye
 
-Now we use Flutter's snackbar implementation instead of GetX's one to help with error messaging and testing.
+- Consumo REST desde `https://pokeapi.co/api/v2/pokemon`
+- Lista dinámica con scroll fluido y carga incremental
+- Navegación entre pantalla principal, detalle y formulario de creación/edición
+- Manejo de estado con GetX
+- Operaciones CRUD simuladas únicamente en RAM
 
-Add this on the AndroidManifest.xml (just bellow the manifest xmlns:android="http://schemas.android.com/apk/res/android" line)
-```
-<uses-permission android:name="android.permission.INTERNET" />
-```
+## Estructura
 
-Backend server:   
+- `lib/features/pokemon/domain` para entidades y contratos
+- `lib/features/pokemon/data` para API REST y almacenamiento en memoria
+- `lib/features/pokemon/presentation` para controlador y pantallas
 
-```
-https://roble.openlab.uninorte.edu.co/
-```
+## Ejecutar
 
-To generate ICONS:
-1. Copy the icon on assets/launcher_icon/
-2. Run
-```
-flutter pub run flutter_launcher_icons:main
-```
-
-Use the .env.sample as template to include Roble´s project contract
-
-Using this structure:
-
-
-<img width="657" height="497" alt="image" src="https://github.com/user-attachments/assets/bb3bf21c-a2d4-4982-b6d0-a048cb1cff69" />
-
-
-
-
-## Testing
-
-### Pure widget tests
-
-On these test we test the UI mocking the controllers.
-
-1. add_product_page_test
-2. list_product_page_test
-3. login_page_test
-
-### Widget test up to data source 
-
-On this test we verify the UI, controllers, repositories, and the data source, but we mock the http client and shared preferences.
-
-1. product_data_source_test
-
-Run all tests with:
-
-```
-flutter test
+```bash
+flutter pub get
+flutter run
 ```
 
-Or run a specific test with:
+## Validación
 
+```bash
+flutter analyze
 ```
-flutter test test/path_to_test.dart
-```
-
-### Integration test
-
-On this test we verify the entire flow of the app, from the UI to the backend, using a mock http client and shared preferences.
-
-Run the integration test with:
-
-```
-flutter test integration_test/app_test.dart
-```
-
-or for web:
-
-```
-flutter drive --driver=test_driver/integration_test.dart --target=integration_test/app_test.dart -d chrome
-```
-
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/211904b7-abc7-4cbe-8a85-6e1ff0a28654" alt="IntegrationTest" width="350"/>
-</p>
-
-
-
